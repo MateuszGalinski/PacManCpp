@@ -43,5 +43,5 @@ namespace PMConst {
 	const int PLAYER_START_Y = 23;
 	const int PELLET_SCORE = 10;
 	const int POWERBALL_SCORE = 50;
-	const int GAME_TICK = 400;
+	const int GAME_TICK = 300;
 }

@@ -2,7 +2,9 @@
 
 #include <QWidget>
 #include <QtGui>
+#include <QGraphicsPixmapItem>
 #include <iostream>
+#include <vector>
 #include "enemy.h"
 
 class Blinky : public Enemy {

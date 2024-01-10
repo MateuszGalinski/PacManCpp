@@ -11,6 +11,8 @@
 using namespace PMConst;
 
 Pinky::Pinky(QWidget* parent) : Enemy(parent){
+	QString fileName = "Pinky.png";
+	sprites.push_back(QPixmap(fileName));
 	leftUpperX = TILE_SIZE * GATE_X + TILE_SIZE;
     leftUpperY = TILE_SIZE * GATE_Y;
     height = TILE_SIZE;
@@ -20,18 +22,7 @@ Pinky::Pinky(QWidget* parent) : Enemy(parent){
 
 void Pinky::paintEvent(QPaintEvent*){
 	QPainter painter(this);
-
-	painter.setPen(Qt::NoPen);
-	
-	if(Enemy::currentState == Enemy::fright){
-		painter.setBrush(Qt::white);
-	} else if (currentState == chase){
-		painter.setBrush(Qt::magenta);
-	} else{
-		painter.setBrush(Qt::green);
-	}
-	
-	painter.drawPie(leftUpperX, leftUpperY, width, height, MOUTH_ANGLE/2 * QT_ANG, BODY_ANGLE * QT_ANG);
+	painter.drawPixmap(leftUpperX, leftUpperY, width, height, sprites[currentState]);
 }
 
 void Pinky::move(const Player& player){

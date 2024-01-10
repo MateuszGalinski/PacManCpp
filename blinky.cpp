@@ -1,5 +1,8 @@
 #include <QWidget>
 #include <QtGui>
+#include <QPixmap>
+#include <QGraphicsPixmapItem>
+#include <QString>
 #include "blinky.h"
 #include "constNamespace.h"
 
@@ -11,6 +14,8 @@
 using namespace PMConst;
 
 Blinky::Blinky(QWidget* parent) : Enemy(parent){
+	QString fileName = "Blinky.png";
+	sprites.push_back(QPixmap(fileName));
 	leftUpperX = TILE_SIZE * GATE_X;
     leftUpperY = TILE_SIZE * GATE_Y;
     height = TILE_SIZE;
@@ -20,17 +25,7 @@ Blinky::Blinky(QWidget* parent) : Enemy(parent){
 
 void Blinky::paintEvent(QPaintEvent*){
 	QPainter painter(this);
-
-	painter.setPen(Qt::NoPen);
-	
-	if(currentState == fright){
-		painter.setBrush(Qt::white);
-	} else if(currentState == chase) {
-		painter.setBrush(Qt::red);
-	} else{
-		painter.setBrush(Qt::green);
-	}
-	painter.drawPie(leftUpperX, leftUpperY, width, height, MOUTH_ANGLE/2 * QT_ANG, BODY_ANGLE * QT_ANG);
+	painter.drawPixmap(leftUpperX, leftUpperY, width, height, sprites[currentState]);
 }
 
 void Blinky::move(const Player& player){

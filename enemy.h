@@ -3,6 +3,7 @@
 #include <QWidget>
 #include <QtGui>
 #include <QLabel>
+#include <QPixmap>
 #include <iostream>
 #include "player.h"
 
@@ -19,9 +20,9 @@ class Enemy : public QWidget {
 			down = 3
 		};
 		enum state {
-			chase,
-			fright,
-			died
+			chase = 2,
+			fright = 1,
+			died = 0
 		};
 		void setDead();
 		bool isFrightened();
@@ -29,6 +30,7 @@ class Enemy : public QWidget {
 	protected:
 		moveDirection previousMove;
 		state currentState;
+		std::vector<QPixmap> sprites;
 		QTimer* ghostFrightTimer;
 		
 		virtual void paintEvent(QPaintEvent*) = 0;

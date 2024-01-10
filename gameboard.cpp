@@ -88,10 +88,12 @@ Gameboard::Gameboard(QWidget* parent) : QWidget(parent){
 	for(auto& i : pelletVector){
 		playingZone -> addWidget(i.get());
 	}
-	playingZone -> addWidget(player);
+	
 	for(auto& i : enemyVector){
 		playingZone -> addWidget(i.get());
 	}
+	
+	playingZone -> addWidget(player);
 	
 	wholeLayout -> addLayout(topLayout);
 	wholeLayout -> addLayout(playingZone);

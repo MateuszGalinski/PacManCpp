@@ -14,9 +14,13 @@ int distance(int x1, int y1, int x2, int y2){
 }
 
 Enemy::Enemy(QWidget* parent) : QWidget(parent){
+	QString deadSprite = "DeadPNG.png";
+	QString scaredSprite = "ScaredPNG.png";
 	currentState = chase;
 	ghostFrightTimer = new QTimer();
 	connect(ghostFrightTimer, SIGNAL(timeout()), this, SLOT(frightStateOff()));
+	sprites.push_back(QPixmap(deadSprite));
+	sprites.push_back(QPixmap(scaredSprite));
 }
 
 Enemy::moveDirection Enemy::getNextMove(int ghostTileX, int ghostTileY, int targetX, int targetY, moveDirection previousMove) {

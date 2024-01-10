@@ -17,6 +17,8 @@ int tileDistance(int x1, int y1, int x2, int y2){
 }
 
 Clyde::Clyde(QWidget* parent) : Enemy(parent){
+	QString fileName = "Clyde.png";
+	sprites.push_back(QPixmap(fileName));
 	leftUpperX = TILE_SIZE * GATE_X - TILE_SIZE;
     leftUpperY = TILE_SIZE * GATE_Y;
     height = TILE_SIZE;
@@ -26,17 +28,7 @@ Clyde::Clyde(QWidget* parent) : Enemy(parent){
 
 void Clyde::paintEvent(QPaintEvent*){
 	QPainter painter(this);
-
-	painter.setPen(Qt::NoPen);
-	
-	if(currentState == fright){
-		painter.setBrush(Qt::white);
-	} else if(currentState == chase) {
-		painter.setBrush(QColorConstants::Svg::orange);
-	} else{
-		painter.setBrush(Qt::green);
-	}
-	painter.drawPie(leftUpperX, leftUpperY, width, height, MOUTH_ANGLE/2 * QT_ANG, BODY_ANGLE * QT_ANG);
+	painter.drawPixmap(leftUpperX, leftUpperY, width, height, sprites[currentState]);
 }
 
 void Clyde::move(const Player& player){

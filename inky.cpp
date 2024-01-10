@@ -11,7 +11,9 @@
 using namespace PMConst;
 
 Inky::Inky(QWidget* parent) : Enemy(parent){
-    leftUpperX = TILE_SIZE * GATE_X;
+	QString fileName = "Inky.png";
+	sprites.push_back(QPixmap(fileName));
+    leftUpperX = TILE_SIZE * GATE_X + TILE_SIZE;
     leftUpperY = TILE_SIZE * GATE_Y + TILE_SIZE;
     height = TILE_SIZE;
     width = TILE_SIZE;
@@ -20,17 +22,7 @@ Inky::Inky(QWidget* parent) : Enemy(parent){
 
 void Inky::paintEvent(QPaintEvent*){
 	QPainter painter(this);
-
-	painter.setPen(Qt::NoPen);
-	
-	if(currentState == fright){
-		painter.setBrush(Qt::white);
-	} else if(currentState == chase) {
-		painter.setBrush(QColorConstants::Svg::turquoise);
-	} else{
-		painter.setBrush(Qt::green);
-	}
-	painter.drawPie(leftUpperX, leftUpperY, width, height, MOUTH_ANGLE/2 * QT_ANG, BODY_ANGLE * QT_ANG);
+	painter.drawPixmap(leftUpperX, leftUpperY, width, height, sprites[currentState]);
 }
 
 void Inky::move(const Player& player){
@@ -88,7 +80,7 @@ bool Inky::collidesPlayer(const Player& player){
 }
 
 void Inky::reset(){
-	leftUpperX = TILE_SIZE * GATE_X;
+	leftUpperX = TILE_SIZE * GATE_X + TILE_SIZE;
     leftUpperY = TILE_SIZE * GATE_Y + TILE_SIZE;
     previousMove = down;
     currentState = chase;
